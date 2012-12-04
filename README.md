@@ -27,13 +27,16 @@ contents, so if you’ve already got stuff in there (eg MySQL owned by a
 `mysql` user) you’ll need to be a touch more careful. This is a
 recommendation from the Homebrew
 
-brew does not like installing packages as root and will refuse to do so.
-We therefore need a nominated non-root user to install stuff as.
+Homebrew does not like installing packages as root and will refuse to do so.
+Chef must be able to run brew as a designated non-root user. This can be
+specified manually with a node attribute:
 
- node["homebrew"]["run_as"] = "leftbrained"
+    node["homebrew"]["run_as"] = "leftbrained"
 
-The above attribute must be set to a valid username in order to install
-packages.  If the attribute isn't set on the node an exception with be thrown.
+If you are running Chef with `sudo`, this attribute will default to the
+`SUDO_USER` environment variable provided in the `sudo` subshell. If the
+attribute isn't somehow set to a valid username, an exception with be thrown
+when installing homebrew packages.
 
 ## Platform
 

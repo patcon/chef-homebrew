@@ -8,7 +8,7 @@ class Chef
   class Exceptions
     class Homebrew
       class NoRunAsUser < RuntimeError
-        def initialize(message="You must set the attribute node['homebrew']['run_as'] before installing with brew")
+        def initialize(message="You are running Chef from a root login shell. You must set the attribute node['homebrew']['run_as'] before using the homebrew package LWRP.")
           super(message)
         end
       end
